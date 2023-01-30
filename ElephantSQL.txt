@@ -1,0 +1,99 @@
+ElephantSQL
+https://api.elephantsql.com/console/fbe3a32a-3dc0-432b-933d-b55f9d5ea4c3/details
+
+
+(Host) Server			:  dados no elephantSQL
+
+Region   			:  dados no elephantSQL
+
+Created at 			:  dados no elephantSQL
+
+(nome) User & Default database  :  dados no elephantSQL
+
+Password  			:   dados no elephantSQL
+
+URL         			:  dados no elephantSQL
+
+
+
+STRAPI instalação no terminal
+
+paso 1
+npx create-strapi-app strapi-landing-pages
+
+paso 2 perguntas
+
+Custom (manual settings)
+postgres
+
+nome da base de dados
+		host
+	    password		
+
+
+ npm run develop		
+
+
+
+
+Welcome to Strapi!
+url=  http://localhost:1337/admin/auth/register-admin
+
+E_mail =  canino
+
+senha  =  
+
+
+
+
+Cloudinary local onde vai guardar as imagens
+https://github.com/strapi/strapi/tree/main/packages/providers/upload-cloudinary
+
+npm install @strapi/provider-upload-cloudinary --save
+
+na pasta config/plugins.js se não tiver o arquivo cria um e cola o que esta abaixo
+
+module.exports = ({ env }) => ({
+  // ...
+  upload: {
+    config: {
+      provider: 'cloudinary',
+      providerOptions: {
+        cloud_name: env('CLOUDINARY_NAME'),
+        api_key: env('CLOUDINARY_KEY'),
+        api_secret: env('CLOUDINARY_SECRET'),
+      },
+      actionOptions: {
+        upload: {},
+        uploadStream: {},
+        delete: {},
+      },
+    },
+  },
+  // ...
+});
+
+
+
+
+
+na pasta config no arquivo middlewares.js remove este 
+nome ///'strapi::security',//// e cola o que esta abaixo
+
+ {
+    name: 'strapi::security',
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          'connect-src': ["'self'", 'https:'],
+          'img-src': ["'self'", 'data:', 'blob:', 'dl.airtable.com', 'res.cloudinary.com'],
+          'media-src': ["'self'", 'data:', 'blob:', 'dl.airtable.com', 'res.cloudinary.com'],
+          upgradeInsecureRequests: null,
+        },
+      },
+    },
+  },
+
+
+
